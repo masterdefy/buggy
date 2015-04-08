@@ -1,0 +1,16 @@
+.bundle
+db/*.sqlite3
+db/*.sqlite3-journal
+config/database.yml
+log/*.log
+log/*.log.lck
+log/*.pid
+tmp
+public/uploads
+public/system
+public/video
+public/images
+.idea
+.ruby-version
+.ruby-gemset
+.rspec
