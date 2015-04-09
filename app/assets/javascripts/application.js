@@ -1,5 +1,5 @@
 //= require jquery
-//= require jquery_ujs
+//= require handlebars.runtime
 //= require underscore
 //= require backbone
 //= require backbone_rails_sync
