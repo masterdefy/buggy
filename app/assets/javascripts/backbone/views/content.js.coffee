@@ -7,9 +7,14 @@ class Buggy.Views.Content extends Backbone.View
   render: ->
     @$el.html @template
     @renderEmptyView()
+    @renderProjectsView()
     @
 
   renderEmptyView: ->
     v = new Buggy.Views.Empty()
     @$('#main-area').html(v.render().el)
+
+  renderProjectsView: ->
+    v = new Buggy.Views.Projects()
+    @$('#sidebar-area').html(v.render().el)
 
