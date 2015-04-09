@@ -15,6 +15,6 @@ class Buggy.Views.Content extends Backbone.View
     @$('#main-area').html(v.render().el)
 
   renderProjectsView: ->
-    v = new Buggy.Views.Projects()
+    v = new Buggy.Views.Projects({ collection: new Buggy.Collections.Projects })
     @$('#sidebar-area').html(v.render().el)
 
