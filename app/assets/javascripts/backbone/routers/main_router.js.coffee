@@ -10,12 +10,14 @@ class Buggy.Routers.MainRouter extends Backbone.Router
 
   index: ->
     @layoutViews()
+    @contentView.swapMain new Buggy.Views.Ads()
+    @contentView.swapSide new Buggy.Views.News()
 
   project: ->
     @layoutViews()
+    @contentView.swapMain new Buggy.Views.Empty()
+    @contentView.swapSide new Buggy.Views.Projects({ collection: new Buggy.Collections.Projects })
 
   layoutViews: ->
     $('#header').html @headerView.render().el
     $('#content').html @contentView.render().el
-
-

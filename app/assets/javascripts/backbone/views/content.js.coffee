@@ -6,15 +6,20 @@ class Buggy.Views.Content extends Backbone.View
 
   render: ->
     @$el.html @template
-    @renderEmptyView()
-    @renderProjectsView()
     @
 
-  renderEmptyView: ->
-    v = new Buggy.Views.Empty()
-    @$('#main-area').html(v.render().el)
+  swapMain: (v) ->
+    @changeCurrentMainView v
+    @$('#main-area').html @currentMainView.render().el
 
-  renderProjectsView: ->
-    v = new Buggy.Views.Projects({ collection: new Buggy.Collections.Projects })
-    @$('#sidebar-area').html(v.render().el)
+  changeCurrentMainView: (v) ->
+    @currentMainView.remove() if @currentMainView
+    @currentMainView = v
 
+  swapSide: (v) ->
+    @changeCurrentSideView v
+    @$('#sidebar-area').html @currentSideView.render().el
+
+  changeCurrentSideView: (v) ->
+    @currentSideView.remove() if @currentSideView
+    @currentSideView = v
