@@ -10,10 +10,15 @@ class Buggy.Views.Content extends Backbone.View
 
   initialize: ->
     @listenTo Buggy.Vent, 'project:create', @swapMainToEmpty
+    @listenTo Buggy.Vent, 'project:new', @swapToNewProject
 
   swapMainToEmpty: ->
     @swapMain new Buggy.Views.Empty()
     Backbone.history.navigate '/projects'
+
+  swapToNewProject: ->
+    @swapMain new Buggy.Views.NewProject({ model: new Buggy.Models.Project })
+    Backbone.history.navigate '/projects/new'
 
   swapMain: (v) ->
     @changeCurrentMainView v
