@@ -8,6 +8,13 @@ class Buggy.Views.Content extends Backbone.View
     @$el.html @template
     @
 
+  initialize: ->
+    @listenTo Buggy.Vent, 'project:create', @swapMainToEmpty
+
+  swapMainToEmpty: ->
+    @swapMain new Buggy.Views.Empty()
+    Backbone.history.navigate '/projects'
+
   swapMain: (v) ->
     @changeCurrentMainView v
     @$('#main-area').html @currentMainView.render().el
