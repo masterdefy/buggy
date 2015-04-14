@@ -3,6 +3,7 @@ class Buggy.Routers.MainRouter extends Backbone.Router
   routes:
     '': 'index'
     'projects': 'project'
+    'projects/new': 'newProject'
 
   initialize: ->
     @headerView = new Buggy.Views.Header()
@@ -16,6 +17,11 @@ class Buggy.Routers.MainRouter extends Backbone.Router
   project: ->
     @layoutViews()
     @contentView.swapMain new Buggy.Views.Empty()
+    @contentView.swapSide new Buggy.Views.Projects({ collection: new Buggy.Collections.Projects })
+
+  newProject: ->
+    @layoutViews()
+    @contentView.swapMain new Buggy.Views.NewProject({ model: new Buggy.Models.Project })
     @contentView.swapSide new Buggy.Views.Projects({ collection: new Buggy.Collections.Projects })
 
   layoutViews: ->
