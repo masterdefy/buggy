@@ -9,7 +9,7 @@ window.Buggy =
   Views: {}
   Collections: {}
   Models: {}
-
+  Vent: _.clone(Backbone.Events)
   initialize: ->
     new Buggy.Routers.MainRouter()
     Backbone.history.start()

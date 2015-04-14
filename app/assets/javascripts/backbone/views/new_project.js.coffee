@@ -13,4 +13,5 @@ class Buggy.Views.NewProject extends Backbone.View
     e.preventDefault()
     @model.set name: @$('#name').val()
     @model.set description: @$('#description').val()
-    @model.save()
+    @model.save {},
+      success: (model) -> Buggy.Vent.trigger 'project:create', model

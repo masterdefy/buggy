@@ -9,7 +9,12 @@ class Buggy.Views.Projects extends Backbone.View
 
   initialize: ->
     @listenTo @collection, "reset", @render
+    @listenTo Buggy.Vent, 'project:create', @addToCollection
+    @listenTo @collection, 'add', @renderProject
     @collection.fetch({ reset: true })
+
+  addToCollection: (model) ->
+    @collection.add model
 
   render: ->
     @$el.html @template
