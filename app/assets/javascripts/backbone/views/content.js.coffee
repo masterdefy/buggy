@@ -11,6 +11,10 @@ class Buggy.Views.Content extends Backbone.View
   initialize: ->
     @listenTo Buggy.Vent, 'project:create', @swapMainToEmpty
     @listenTo Buggy.Vent, 'project:new', @swapToNewProject
+    @listenTo Buggy.Vent, 'project:show', @projectShow
+
+  projectShow: (model) ->
+    @swapMain new Buggy.Views.ProjectDetails({ model: model })
 
   swapMainToEmpty: ->
     @swapMain new Buggy.Views.Empty()
