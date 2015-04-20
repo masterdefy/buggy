@@ -5,6 +5,7 @@ class Buggy.Routers.MainRouter extends Backbone.Router
     'projects': 'project'
     'projects/new': 'newProject'
     'projects/:id': 'showProject'
+    'projects/edit/:id': 'editProject'
 
   initialize: ->
     @headerView = new Buggy.Views.Header()
@@ -30,6 +31,12 @@ class Buggy.Routers.MainRouter extends Backbone.Router
     @contentView.swapSide new Buggy.Views.Projects({ collection: new Buggy.Collections.Projects })
     m = new Buggy.Models.Project({ id: id })
     @contentView.swapMain new Buggy.Views.ProjectDetails({ model: m })
+
+  editProject: (id) ->
+    @layoutViews()
+    @contentView.swapSide new Buggy.Views.Projects({ collection: new Buggy.Collections.Projects })
+    m = new Buggy.Models.Project({ id: id })
+    @contentView.swapMain new Buggy.Views.NewProject({ model: m })
 
   layoutViews: ->
     $('#header').html @headerView.render().el
