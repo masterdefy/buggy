@@ -6,7 +6,7 @@ class Buggy.Views.NewProject extends Backbone.View
     "click button": "saveProject"
 
   render: ->
-    @$el.html @template
+    @$el.html @template(@model.toJSON())
     @
 
   saveProject: (e) ->
