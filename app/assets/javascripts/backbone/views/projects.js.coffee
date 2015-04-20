@@ -5,15 +5,13 @@ class Buggy.Views.Projects extends Backbone.View
   events:
     'click a.btn': 'newProject'
 
-  newProject: (e) ->
-    e.preventDefault()
-    Buggy.Vent.trigger 'project:new'
-
   initialize: ->
+    @childViews = []
     @listenTo @collection, "reset", @render
     @listenTo Buggy.Vent, 'project:create', @addToCollection
     @listenTo @collection, 'add', @renderProject
     @collection.fetch({ reset: true })
+    @listenTo Buggy.Vent, 'remove', @leave
 
   addToCollection: (model) ->
     @collection.add model
@@ -25,4 +23,9 @@ class Buggy.Views.Projects extends Backbone.View
 
   renderProject: (model) ->
     v = new Buggy.Views.Project({ model: model })
+    @childViews.push(v)
     @$('ul').append(v.render().el)
+
+  newProject: (e) ->
+    e.preventDefault()
+    Buggy.Vent.trigger 'project:new'
