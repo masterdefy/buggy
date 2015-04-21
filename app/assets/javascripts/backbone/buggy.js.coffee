@@ -12,7 +12,8 @@ window.Buggy =
   Models: {}
   Mixins: {}
   Vent: _.clone(Backbone.Events)
-  initialize: ->
+  initialize: (data) ->
+    Buggy.currentUser = new Buggy.Models.CurrentUser(data.current_user)
     new Buggy.Routers.MainRouter()
     Backbone.history.start()
 
