@@ -7,7 +7,8 @@ class Buggy.Views.ProjectDetails extends Backbone.View
     'click button.edit': 'editProject'
 
   initialize: ->
-    @listenTo @model, 'sync', @render
+    @childViews = []
+    @listenTo @model, 'sync', @renderDetails
     @model.fetch()
 
   editProject: -> Buggy.Vent.trigger "project:edit", @model
@@ -20,3 +21,9 @@ class Buggy.Views.ProjectDetails extends Backbone.View
   render: ->
     @$el.html(@template(@model.toJSON()))
     @
+
+  renderDetails: ->
+     @$el.html(@template(@model.toJSON()))
+     v = new Buggy.Views.Issues({ collection: @model.issues })
+     @childViews.push v
+     @$('#issues').html v.render().el
