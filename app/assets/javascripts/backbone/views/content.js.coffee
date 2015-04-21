@@ -14,6 +14,7 @@ class Buggy.Views.Content extends Backbone.View
     @listenTo Buggy.Vent, 'project:show', @projectShow
     @listenTo Buggy.Vent, 'project:destroy', @swapMainToEmpty
     @listenTo Buggy.Vent, 'project:edit', @editProject
+    @listenTo Buggy.Vent, 'user:logged_in', @swapMainToEmpty
 
   editProject: (model) ->
     @swapMain new Buggy.Views.NewProject({ model: model })
@@ -24,7 +25,6 @@ class Buggy.Views.Content extends Backbone.View
 
   swapMainToEmpty: ->
     @swapMain new Buggy.Views.Empty()
-    Backbone.history.navigate '/projects'
 
   swapToNewProject: ->
     @swapMain new Buggy.Views.NewProject({ model: new Buggy.Models.Project })

@@ -7,6 +7,10 @@ class Buggy.Views.Login extends Backbone.View
 
   initialize: ->
     @listenTo @model, 'error', @renderError
+    @listenTo @model, 'sync', @triggerLoggedIn
+
+  triggerLoggedIn: ->
+    Buggy.Vent.trigger 'user:logged_in', @model.get('id'), @model.get('email')
 
   renderError: ->
     @$('.alert').html('Credentials are not valid').show()
