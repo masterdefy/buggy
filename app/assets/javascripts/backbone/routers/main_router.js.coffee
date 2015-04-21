@@ -1,4 +1,4 @@
-class Buggy.Routers.MainRouter extends Backbone.Router
+ class Buggy.Routers.MainRouter extends Backbone.Router
 
   routes:
     '': 'index'
@@ -7,6 +7,7 @@ class Buggy.Routers.MainRouter extends Backbone.Router
     'projects/:id': 'showProject'
     'projects/edit/:id': 'editProject'
     'login': 'login'
+    'logout': 'logout'
 
   initialize: ->
     @headerView = new Buggy.Views.Header()
@@ -15,6 +16,9 @@ class Buggy.Routers.MainRouter extends Backbone.Router
   login: ->
     @layoutViews()
     @contentView.swapMain(new Buggy.Views.Login({ model: new Buggy.Models.Login() }))
+
+  logout: ->
+    Buggy.Vent.trigger 'user:logged_out'
 
   index: ->
     @layoutViews()
