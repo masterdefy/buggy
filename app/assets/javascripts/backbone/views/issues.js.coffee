@@ -13,6 +13,7 @@ class Buggy.Views.Issues extends Backbone.View
 
   addToCollection: (model) ->
     @collection.add model
+    Buggy.Vent.trigger 'issues:change', model, @collection.length
 
   render: ->
     @$el.html(@template({ count: @collection.length }))

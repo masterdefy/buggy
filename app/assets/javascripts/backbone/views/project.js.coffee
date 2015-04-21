@@ -8,6 +8,11 @@ class Buggy.Views.Project extends Backbone.View
   initialize: ->
     @listenTo @model, 'destroy', @remove
     @listenTo @model, 'change:name', @render
+    @listenTo Buggy.Vent, 'issues:change', @updateCounter
+
+  updateCounter: (model, count) ->
+    if model.get('project_id') is @model.id
+      @$('span.badge').text(count)
 
   showDetails: (e) ->
     e.preventDefault()
