@@ -4,6 +4,15 @@ class Buggy.Views.Issues extends Backbone.View
 
   initialize: ->
     @childViews = []
+    @listenTo Buggy.Vent, 'issue:create', @addToCollection
+    @listenTo @collection, 'add', @renderIssue
+    @listenTo @collection, 'add', @updateCounter
+
+  updateCounter: ->
+    @$('span').text @collection.length
+
+  addToCollection: (model) ->
+    @collection.add model
 
   render: ->
     @$el.html(@template({ count: @collection.length }))

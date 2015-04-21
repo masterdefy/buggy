@@ -7,6 +7,17 @@ class Buggy.Views.NewIssue extends Backbone.View
 
   initialize: ->
     @listenTo @model, 'error', @parseErrorResponse
+    @listenTo @model, 'sync', @success
+
+  success: ->
+    @clearForm()
+    Buggy.Vent.trigger 'issue:create', @model
+
+  clearForm: ->
+    @$('#name').val('')
+    @$('#description').val('')
+    @clearErrors()
+    delete @model.id
 
   render: ->
     @$el.html @template(@model.toJSON())
