@@ -27,3 +27,7 @@ class Buggy.Views.ProjectDetails extends Backbone.View
      v = new Buggy.Views.Issues({ collection: @model.issues })
      @childViews.push v
      @$('#issues').html v.render().el
+
+     v1 = new Buggy.Views.NewIssue({ model: new Buggy.Models.Issue({ project_id: @model.id }) })
+     @childViews.push v1
+     @$('#new_issue').html v1.render().el
