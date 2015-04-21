@@ -6,10 +6,15 @@ class Buggy.Routers.MainRouter extends Backbone.Router
     'projects/new': 'newProject'
     'projects/:id': 'showProject'
     'projects/edit/:id': 'editProject'
+    'login': 'login'
 
   initialize: ->
     @headerView = new Buggy.Views.Header()
     @contentView = new Buggy.Views.Content()
+
+  login: ->
+    @layoutViews()
+    @contentView.swapMain(new Buggy.Views.Login({ model: new Buggy.Models.Login() }))
 
   index: ->
     @layoutViews()
