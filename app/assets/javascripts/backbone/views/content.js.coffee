@@ -15,6 +15,10 @@ class Buggy.Views.Content extends Backbone.View
     @listenTo Buggy.Vent, 'project:destroy', @swapMainToEmpty
     @listenTo Buggy.Vent, 'project:edit', @editProject
     @listenTo Buggy.Vent, 'user:logged_in', @swapMainToEmpty
+    @listenTo Buggy.Vent, 'access_denied', @accessDenied
+
+  accessDenied: ->
+    @swapMain new Buggy.Views.AccessDenied()
 
   editProject: (model) ->
     @swapMain new Buggy.Views.NewProject({ model: model })
