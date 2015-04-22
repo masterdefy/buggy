@@ -7,6 +7,9 @@ class Buggy.Views.ProjectDetails extends Backbone.View
     'click button.edit': 'editProject'
 
   initialize: ->
+    if @model.get('user_id') is Buggy.currentUser.id
+      @model.set owned: true
+
     @childViews = []
     @listenTo @model, 'sync', @renderDetails
     @listenTo @model, 'error', @triggerAccessDenied

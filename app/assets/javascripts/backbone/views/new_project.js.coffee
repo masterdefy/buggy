@@ -6,11 +6,17 @@ class Buggy.Views.NewProject extends Backbone.View
     "click button": "saveProject"
 
   initialize: ->
-    @listenTo @model, 'sync', @render
+    @listenTo @model, 'sync', @checkForOwnership
     @listenTo @model, 'invalid', @renderErrors
     @listenTo @model, 'error', @parseErrorResponse
 
     @model.fetch() unless @model.isNew()
+
+  checkForOwnership: ->
+    if @model.get('user_id') is Buggy.currentUser.id
+      @render()
+    else
+      Buggy.Vent.trigger 'access_denied'
 
   render: ->
     @$el.html @template(@model.toJSON())
