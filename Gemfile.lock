@@ -71,6 +71,8 @@ GEM
       tilt (~> 1.2)
     hike (1.2.3)
     i18n (0.7.0)
+    i18n-js (2.1.2)
+      i18n
     jbuilder (2.2.12)
       activesupport (>= 3.0.0, < 5)
       multi_json (~> 1.2)
@@ -146,6 +148,7 @@ DEPENDENCIES
   cancan
   coffee-rails (~> 4.0.0)
   handlebars_assets
+  i18n-js
   jbuilder (~> 2.0)
   jquery-rails
   pg
