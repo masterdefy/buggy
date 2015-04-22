@@ -9,14 +9,18 @@ class Buggy.Views.ProjectDetails extends Backbone.View
   initialize: ->
     @childViews = []
     @listenTo @model, 'sync', @renderDetails
+    @listenTo @model, 'error', @triggerAccessDenied
+    @listenTo @model, 'destroy', @triggerProjectDestroy
     @model.fetch()
+
+  triggerAccessDenied: -> Buggy.Vent.trigger 'access_denied'
+  triggerProjectDestroy: -> Buggy.Vent.trigger 'project:destroy'
 
   editProject: -> Buggy.Vent.trigger "project:edit", @model
 
   deleteProject: ->
     return unless confirm("Are you sure?")
-    @model.destroy
-      success: -> Buggy.Vent.trigger "project:destroy"
+    @model.destroy { wait: true }
 
   render: ->
     @$el.html(@template(@model.toJSON()))
