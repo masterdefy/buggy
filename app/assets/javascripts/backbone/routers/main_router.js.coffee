@@ -32,7 +32,11 @@
 
   newProject: ->
     @layoutViews()
-    @contentView.swapMain new Buggy.Views.NewProject({ model: new Buggy.Models.Project })
+    if Buggy.currentUser.get('loggedIn')
+      v = new Buggy.Views.NewProject({ model: new Buggy.Models.Project })
+    else
+      v = new Buggy.Views.AccessDenied()
+    @contentView.swapMain v
     @contentView.swapSide new Buggy.Views.Projects({ collection: new Buggy.Collections.Projects })
 
   showProject: (id) ->

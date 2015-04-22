@@ -17,7 +17,7 @@ class Buggy.Views.Projects extends Backbone.View
     @collection.add model
 
   render: ->
-    @$el.html @template
+    @$el.html @template({ authenticated: Buggy.currentUser.get('loggedIn') })
     @collection.forEach @renderProject, @
     @
 
