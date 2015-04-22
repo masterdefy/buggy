@@ -10,8 +10,9 @@ class Buggy.Models.CurrentUser extends Backbone.Model
   logout: ->
     m = new Buggy.Models.Login({ id: @id })
     m.destroy
-      success: =>
+      success: (model, data) =>
         @set loggedIn: false
         delete @id
         delete @attributes.email
         delete @attributes.id
+        window.csrf(data.csrf)
